@@ -1,0 +1,54 @@
+﻿@model List<Employee>
+
+<style>
+    /*CSS class for employees with less than 100h worked*/
+    .low-hours-worked {
+        background-color: gray;
+    }
+
+    table {
+        text-align: center;
+        margin: 0 auto;
+    }
+</style>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Total Time Worked</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="@(item.TotalTimeWorked < 100 ? "low-hours-worked" : "")">
+                    <td>@item.Name</td>
+                    <td>@item.GetHoursAndMinutes()</td>
+                    @*<td>@item.TotalTimeWorked</td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@*@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+*@
+@*@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+*@
