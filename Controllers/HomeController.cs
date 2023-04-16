@@ -5,19 +5,21 @@ using Newtonsoft.Json;
 
 namespace RareHomeTest.Controllers
 {
+    [Controller]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public async Task<ActionResult> Index()
+        public async Task<List<Employee>> GetEmployeeData()
         {
             // API Key
-            string url = "https://rc-vault-fap-live-1.azurewebsites.net/api/gettimeentries?code=vO17RnE8vuzXzPJo5eaLLjXjmRW07law99QTD90zat9FfOQJKKUcgQ==";
-
+            string url = "https://rc-vault-fap-live-1.azurewebsites.net/api/gettimeentries?code=";
+            string key = "vO17RnE8vuzXzPJo5eaLLjXjmRW07law99QTD90zat9FfOQJKKUcgQ==";
+            string api = url + key;
             // Create a HttpClient object
             using (HttpClient client = new HttpClient())
             {
                 // Send GET Request to api url and retrieve JSON response
-                string json = await client.GetStringAsync(url);
+                string json = await client.GetStringAsync(api);
 
                 // Deserialize the JSON response into a workable C# object
                 var data = JsonConvert.DeserializeObject<EmployeeModel[]>(json);
@@ -36,8 +38,19 @@ namespace RareHomeTest.Controllers
                                 })
                                    .OrderByDescending(e => e.TotalTimeWorked)
                                    .ToList();
-                return View(employees);
+                return employees;
             }
+        }
+
+        public async Task<ActionResult> EmployeeModelJson()
+        {
+                var employeeData = await GetEmployeeData();
+                return Json(employeeData);
+        }
+        public async Task<ActionResult> Index()
+        {
+                var employees = await GetEmployeeData();
+                return View(employees);
         }
 
         public HomeController(ILogger<HomeController> logger)

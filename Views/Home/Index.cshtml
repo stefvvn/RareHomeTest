@@ -11,7 +11,10 @@
         margin: 0 auto;
     }
 </style>
-<div>
+
+<div style="text-align:center">
+    <div id="chart"></div>
+    <button id="downloadChart">Save Pie-Chart as PNG</button>
     <table>
         <thead>
             <tr>
@@ -25,30 +28,8 @@
                 <tr class="@(item.TotalTimeWorked < 100 ? "low-hours-worked" : "")">
                     <td>@item.Name</td>
                     <td>@item.GetHoursAndMinutes()</td>
-                    @*<td>@item.TotalTimeWorked</td>*@
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-
-
-@*@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-*@
-@*@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-*@
